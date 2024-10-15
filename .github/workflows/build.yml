@@ -10,7 +10,7 @@ jobs:
     strategy: 
         matrix: 
           os: 
-            - windows-latest
+            #- windows-latest
             - macOS-latest
           include:
             - os: windows-latest
