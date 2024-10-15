@@ -29,7 +29,7 @@ jobs:
             sysid: MacOSX-x86-64
             msiurl: .
             enginedir: "/Applications/Wolfram Engine.app"
-            installcmd: brew install --cask wolfram-engine
+            installcmd: brew install wolfram-engine
     runs-on: ${{ matrix.os }}
     env:
       WOLFRAM_SYSTEM_ID: ${{ matrix.sysid }}
