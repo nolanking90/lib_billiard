@@ -42,6 +42,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with: 
           shared-key: "cached-deps"
+          
       - name: Cache/restore Wolfram Engine install
         id: cache-restore
         uses: actions/cache@v2
@@ -51,8 +52,8 @@ jobs:
           path: ${{ env.WOLFRAMENGINE_INSTALLATION_DIRECTORY }}
           key: wolframengine-${{ env.WOLFRAM_SYSTEM_ID }}-${{ env.WOLFRAMENGINE_CACHE_KEY }}
 
-      - name: Download and install Wolfram Engine
-        if: steps.cache-restore.outputs.cache-hit != 'true'
+      - name: Download and install Wolfram Engine (Windows)
+        if: steps.cache-restore.outputs.cache-hit != 'true' && ${{ matrix.os }} == windows-latest
         env:
           WOLFRAMENGINE_INSTALLATION_DIRECTORY: '${{ runner.temp }}\${{ env.WOLFRAMENGINE_INSTALLATION_SUBDIRECTORY }}'
           WOLFRAMENGINE_INSTALL_MSI_PATH: '${{ runner.temp }}\WolframEngine-Install.msi'
@@ -79,6 +80,14 @@ jobs:
           echo 'Installing Wolfram Engine...'
           ${{ matrix.installcmd }}
           echo 'Installed Wolfram Engine.'
+          
+      - name: Download and install Wolfram Engine (MacOS)
+        if: steps.cache-restore.outputs.cache-hit != 'true' && ${{ matrix.os }} == macOS-latest
+        run: |
+          echo 'Installing Wolfram Engine...'
+          ${{ matrix.installcmd }}
+          echo 'Installed Wolfram Engine.'
+          
       - name: Compile
         id: compile
         run: cargo build --release
