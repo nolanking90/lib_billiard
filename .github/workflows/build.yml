@@ -13,10 +13,10 @@ jobs:
             #- windows-latest
             - macOS-latest
           include:
-            - os: windows-latest
-              ext: dylib
-              buildpath: D:\a\billiard\billiard\target\release\libbilliard.dylib
-              outputname: billiards-Win.exe
+            #- os: windows-latest
+            #  ext: dylib
+            #  buildpath: D:\a\billiard\billiard\target\release\libbilliard.dylib
+            #  outputname: billiards-Win.exe
             - os: macOS-latest
               ext: dylib
               buildpath: ./target/release/billiard
